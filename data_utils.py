@@ -14,6 +14,24 @@ def find_column(df: pd.DataFrame, names: list) -> Optional[str]:
     return None
 
 
+def get_disclosure_columns(df: pd.DataFrame) -> dict:
+    """
+    Detect key columns typical of invention disclosure forms (CSV of form responses).
+    Returns dict with keys: title, summary, description (values are column names or None).
+    """
+    return {
+        "title": find_column(df, ["title", "invention title", "invention_title", "name"]),
+        "summary": find_column(
+            df,
+            ["summary", "invention summary", "invention_summary", "abstract", "executive summary"],
+        ),
+        "description": find_column(
+            df,
+            ["description", "detailed description", "technical description", "invention description"],
+        ),
+    }
+
+
 def get_patent_columns(df: pd.DataFrame) -> dict:
     """
     Detect standard patent columns (abstract, embodiment, claims, title, family).
@@ -59,6 +77,20 @@ def build_composite_text(df: pd.DataFrame, columns: dict) -> pd.DataFrame:
     out = df.copy()
     out["_composite_text"] = df.apply(make_composite, axis=1)
     return out
+
+
+def build_disclosure_text(row: pd.Series, columns: dict) -> str:
+    """
+    Build a single text block from invention disclosure columns (title, summary, description).
+    Used for LLM-based cluster assignment.
+    """
+    parts = []
+    for key, col in [("title", columns.get("title")), ("summary", columns.get("summary")), ("description", columns.get("description"))]:
+        if col and col in row.index and pd.notna(row[col]):
+            text = str(row[col]).strip()
+            if text:
+                parts.append(f"[{key}]\n{text}")
+    return "\n\n".join(parts) if parts else ""
 
 
 def row_label_by_title(df: pd.DataFrame, index: int, title_col: Optional[str], max_len: int = 80) -> str:

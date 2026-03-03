@@ -8,17 +8,19 @@ import streamlit as st
 from state import init_session_state
 from tab_clustering import render as render_clustering
 from tab_extraction import render as render_extraction
+from tab_new_patent_grouping import render as render_new_patent_grouping
 from tab_review import render as render_review
 from tab_whitespace import render as render_whitespace
 
 st.set_page_config(page_title="Patent Analysis Tool", layout="wide")
 init_session_state()
 
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "1. Data Extraction",
     "2. Embedding & Clustering",
     "3. Review & Refine",
-    "4. White Space Analysis",
+    "4. New Patent Grouping",
+    "5. White Space Analysis",
 ])
 
 with tab1:
@@ -31,4 +33,7 @@ with tab3:
     render_review()
 
 with tab4:
+    render_new_patent_grouping()
+
+with tab5:
     render_whitespace()
