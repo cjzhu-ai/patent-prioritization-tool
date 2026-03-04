@@ -7,5 +7,5 @@ def render() -> None:
     st.header("White Space Analysis (TBD)")
     st.caption("Competitor landscape and prioritization strategy — TBD.")
     st.info(
-        "WIP."
+        "WIP"
     )
