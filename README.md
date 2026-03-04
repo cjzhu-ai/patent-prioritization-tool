@@ -2,13 +2,11 @@
 
 A web app to organize and analyze patents: extract key information from PDFs, group similar patents into clusters, and match new invention disclosures to those groups.
 
-**No coding required** — you work through tabs in your browser and upload files or paste an API key when asked.
-
 ---
 
 ## What you need before starting
 
-- **Python** installed on your computer (version 3.9 or newer). If you’re not sure, ask your IT team or follow [python.org/downloads](https://www.python.org/downloads/).
+- **Python** installed on your computer (version 3.9 or newer).
 - An **OpenAI API key** (used so the app can call GPT for extraction and naming). You get this from [platform.openai.com](https://platform.openai.com/) after creating an account. The app will ask for it in the relevant tabs; you can also put it in a `.env` file (see below) so you don’t have to type it every time.
 - **Optional:** For **scanned PDFs** (image-only, no selectable text), install **Tesseract** so the app can read the text:
   - **Mac:** Install Homebrew if needed, then in Terminal run: `brew install tesseract`
