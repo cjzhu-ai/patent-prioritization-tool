@@ -102,7 +102,7 @@ def render() -> None:
     )
     openai_key = api_key or os.environ.get("OPENAI_API_KEY")
     if not openai_key:
-        st.warning("Enter an OpenAI API key (or set OPENAI_API_KEY) to run matching.")
+        st.warning("Enter an OpenAI API key to run matching.")
 
     csv_file = st.file_uploader(
         "Upload invention disclosure form (CSV)",
@@ -121,7 +121,7 @@ def render() -> None:
             "Ensure your CSV has columns like 'title', 'invention summary', 'description'."
         )
     else:
-        st.write("Detected columns:", {k: v for k, v in columns.items() if v})
+        #st.write("Detected columns:", {k: v for k, v in columns.items() if v})
 
     n_show = min(5, len(df))
     st.subheader("Preview")
