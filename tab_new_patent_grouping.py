@@ -36,7 +36,7 @@ def _assign_disclosure_to_cluster(
     client = OpenAI(api_key=openai_api_key)
     system = """You are an expert at matching inventions to patent clusters. You will be given:
 1) A list of existing clusters, each with an ID, name, and short description.
-2) An invention disclosure (title, summary, and/or description).
+2) An invention disclosure (title, industry, problem, summary, technical features, and value).
 
 Your task: Determine if this invention fits within ONE of the existing clusters. If it clearly fits, return that cluster's ID and name. If it does not fit any existing cluster, suggest a new cluster name and short description.
 
