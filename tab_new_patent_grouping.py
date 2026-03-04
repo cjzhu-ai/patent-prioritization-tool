@@ -121,7 +121,7 @@ def render() -> None:
             "Ensure your CSV has columns like 'title', 'invention summary', 'description'."
         )
     else:
-        #st.write("Detected columns:", {k: v for k, v in columns.items() if v})
+        st.write("Key columns detected.")
 
     n_show = min(5, len(df))
     st.subheader("Preview")
